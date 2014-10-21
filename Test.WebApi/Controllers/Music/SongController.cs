@@ -44,8 +44,11 @@ namespace Test.WebApi.Controllers
         public IHttpActionResult Post(int albumId, SongModel songModel)
         {
             if (songModel == null ||
-                songModel.AlbumId == 0)
+                (songModel.AlbumId == 0 && albumId == 0))
                 return BadRequest();
+
+            if (songModel.AlbumId == 0)
+                songModel.AlbumId = albumId;
 
             var result = songService.AddSong(songModel.AlbumId, songModel);
 
@@ -56,11 +59,15 @@ namespace Test.WebApi.Controllers
         }
 
         // PUT: api/music/song/5
-        public IHttpActionResult Put(int albumId, SongModel songModel)
+        public IHttpActionResult Put(int albumId, SongModel songModel, int id = 0)
         {
             if (albumId == 0 ||
-                songModel == null)
+                songModel == null ||
+                (songModel.Id == 0 && id == 0))
                 return BadRequest();
+
+            if (songModel.Id == 0)
+                songModel.Id = id;
 
             var result = songService.UpdateSong(albumId, songModel);
 

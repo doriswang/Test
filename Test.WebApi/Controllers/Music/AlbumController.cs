@@ -57,15 +57,17 @@ namespace Test.WebApi.Controllers
         }
 
         // PUT: api/music/album
-        public IHttpActionResult Put(AlbumModel album)
+        public IHttpActionResult Put(AlbumModel album, int id = 0)
         {
             if (album == null ||
-                album.Id == 0 ||
+                (album.Id == 0 && id == 0) ||
                 (album.ArtistName.IsNullOrEmpty() && album.Title.IsNullOrEmpty()))
                 return BadRequest();
 
-            var result = false;
-            //var result = albumService.UpdateAlbum(album);
+            if (album.Id == 0)
+                album.Id = id;
+
+            var result = albumService.UpdateAlbum(album);
 
             if (!result)
                 return InternalServerError();
