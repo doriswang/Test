@@ -44,6 +44,7 @@ namespace Test.WebApi
             config.AddResponseEnrichers(new UserResponseEnricher());
             config.AddResponseEnrichers(new AlbumResponseEnricher());
             config.AddResponseEnrichers(new SongResponseEnricher());
+            config.AddResponseEnrichers(new ArtistResponseEnricher());
         }
 
         private static void ConfigureMessageHandlers(HttpConfiguration config)

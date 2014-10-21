@@ -16,16 +16,19 @@ namespace Test.WebApi
         public static void Initialize()
         {
             Test.Framework.Framework.Initialize();
+
             DataAccessLayer.Initialize();
             TestIdentityProvider.Initialize();
             Container.Register<ISigningCredentialsProvider, SigningCredentialsProvider>();
+
             ServiceRegistry();
         }
 
         private static void ServiceRegistry()
         {
-            Container.Register<IAlbumService, AlbumService>();
             Container.Register<ISongService, SongService>();
+            Container.Register<IAlbumService, AlbumService>();
+            Container.Register<IArtistService, ArtistService>();
         }
     }
 }

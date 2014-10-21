@@ -14,14 +14,16 @@ namespace Test.WebApi.Services
 {
     public class AlbumService : IAlbumService
     {
-        public AlbumService(IDataProvider dataprovider)
+        public AlbumService(IDataProvider dataprovider, ISongService songService)
         {
             this.provider = dataprovider;
             this.repository = provider.MusicRepository;
+            this.songService = songService;
         }
-        public IDataProvider provider { get; set; }
 
+        public IDataProvider provider { get; set; }
         public IMusicRepository repository { get; set; }
+        public ISongService songService { get; set; }
 
         #region IAlbumService Members
 
@@ -112,6 +114,18 @@ namespace Test.WebApi.Services
             var album = Mapper.Map<Album>(albumModel);
 
             var result = repository.AddAlbum(album);
+
+            if (!albumModel.Songs.IsNotNullOrEmpty())
+                return result;
+
+            Mapper.CreateMap<SongModel, Song>();
+
+            var songResult = 0;
+            foreach (var songModel in albumModel.Songs)
+            {
+                songResult += songService.AddSong(result, songModel);
+            }
+
             return result;
         }
 
@@ -157,6 +171,7 @@ namespace Test.WebApi.Services
         }
 
         #endregion
+
 
 
     }

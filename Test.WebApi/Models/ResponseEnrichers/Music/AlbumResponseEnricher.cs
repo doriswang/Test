@@ -62,9 +62,11 @@ namespace Test.WebApi.ResponseEnrichers
         private void Enrich(AlbumModel album, UrlHelper urlHelper)
         {
             var selfUrl = urlHelper.Link("Album", new { controller = "Album", id = album.Id });
-            //album.AddLink(new SelfLink(selfUrl));
+            album.AddLink(new SelfLink(selfUrl));
             //album.AddLink(new EditLink(selfUrl));
-            album.AddLink(new RUDLink(selfUrl));
+            //album.AddLink(new RUDLink(selfUrl));
+            var artistUrl = urlHelper.Link("Artist", new { controller = "Artist", name = album.ArtistName });
+            album.AddLink(new RelatedLink(artistUrl));
             if(album.Songs.IsNotNullOrEmpty())
             {
                 foreach (var song in album.Songs)
@@ -82,9 +84,9 @@ namespace Test.WebApi.ResponseEnrichers
         private void Enrich(SongModel song, UrlHelper urlHelper)
         {
             var selfUrl = urlHelper.Link("Song", new { controller = "Song", albumId = song.AlbumId, id = song.Id });
-            //song.AddLink(new SelfLink(selfUrl));
+            song.AddLink(new SelfLink(selfUrl));
             //song.AddLink(new EditLink(selfUrl));
-            song.AddLink(new RUDLink(selfUrl));
+            //song.AddLink(new RUDLink(selfUrl));
         }
     }
 }

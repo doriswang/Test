@@ -17,8 +17,9 @@ namespace Test.WebApi.Controllers
         {
             this.provider = Container.Resolve<IDataProvider>();
             this.musicRepository = provider.MusicRepository;
-            this.albumService = Container.Resolve<IAlbumService>();
             this.songService = Container.Resolve<ISongService>();
+            this.albumService = Container.Resolve<IAlbumService>();
+            this.artistService = Container.Resolve<IArtistService>();
         }
 
         public IDataProvider provider { get; set; }
@@ -28,5 +29,7 @@ namespace Test.WebApi.Controllers
         public IAlbumService albumService { get; set; }
 
         public ISongService songService { get; set; }
+
+        public IArtistService artistService { get; set; }
     }
 }

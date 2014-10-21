@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Routing;
 
 namespace Test.WebApi.Extensions
 {
@@ -36,8 +38,20 @@ namespace Test.WebApi.Extensions
 
             config.Routes.MapHttpRoute(
                  name: "Song",
-                 routeTemplate: "api/music/song/{albumId}/{id}",
+                 routeTemplate: "api/music/album/{albumId}/song/{id}",
                  defaults: new { controller = "Song", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                 name: "Songs",
+                 routeTemplate: "api/music/album/{albumId}/songs",
+                 defaults: new { controller = "Songs" }
+            );
+
+            config.Routes.MapHttpRoute(
+                 name: "Artist",
+                 routeTemplate: "api/music/artist/{name}",
+                 defaults: new { controller = "Artist" }
             );
         }
     }

@@ -101,9 +101,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework, Version=1.0.5406.29020, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Test.Framework, Version=1.0.5406.39502, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Test.Framework.1.0.5406.29020\lib\net45\Test.Framework.dll</HintPath>
+      <HintPath>..\packages\Test.Framework.1.0.5406.39502\lib\net45\Test.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

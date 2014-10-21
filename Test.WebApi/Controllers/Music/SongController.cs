@@ -41,13 +41,13 @@ namespace Test.WebApi.Controllers
         }
 
         // POST: api/music/song/5
-        public IHttpActionResult Post(int albumId, [FromBody]SongModel songModel)
+        public IHttpActionResult Post(int albumId, SongModel songModel)
         {
-            if (albumId == 0 ||
-                songModel == null)
+            if (songModel == null ||
+                songModel.AlbumId == 0)
                 return BadRequest();
 
-            var result = songService.AddSong(albumId, songModel);
+            var result = songService.AddSong(songModel.AlbumId, songModel);
 
             if (result == 0)
                 return InternalServerError();
@@ -56,7 +56,7 @@ namespace Test.WebApi.Controllers
         }
 
         // PUT: api/music/song/5
-        public IHttpActionResult Put(int albumId, [FromBody]SongModel songModel)
+        public IHttpActionResult Put(int albumId, SongModel songModel)
         {
             if (albumId == 0 ||
                 songModel == null)

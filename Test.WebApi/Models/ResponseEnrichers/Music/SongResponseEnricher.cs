@@ -58,14 +58,15 @@ namespace Test.WebApi.ResponseEnrichers
             return response;
         }
 
-        private void Enrich(SongModel song, UrlHelper urlHelper)
+        public void Enrich(SongModel song, UrlHelper urlHelper)
         {
             var selfUrl = urlHelper.Link("Song", new { controller = "Song", albumId = song.AlbumId, id = song.Id });
-            var albumUrl = urlHelper.Link("Album", new { controller = "Album", id = song.AlbumId });
-            //song.AddLink(new SelfLink(selfUrl));
-            song.AddLink(new RUDLink(selfUrl));
+            song.AddLink(new SelfLink(selfUrl));
             //song.AddLink(new EditLink(selfUrl));
+
+            var albumUrl = urlHelper.Link("Album", new { controller = "Album", id = song.AlbumId });
             song.AddLink(new RelatedLink(albumUrl));
+            //song.AddLink(new RUDLink(selfUrl));
         }
     }
 }

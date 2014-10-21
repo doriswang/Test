@@ -97,9 +97,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Test.Framework, Version=1.0.5406.29020, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Test.Framework, Version=1.0.5406.39502, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Test.Framework.1.0.5406.29020\lib\net45\Test.Framework.dll</HintPath>
+      <HintPath>..\packages\Test.Framework.1.0.5406.39502\lib\net45\Test.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -122,9 +122,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Test.Data\Test.Data.csproj">
       <Project>{fd899ba5-6fd8-4a24-b541-f029b098439e}</Project>
       <Name>Test.Data</Name>
@@ -137,6 +134,9 @@
       <Project>{54863b3c-fbfb-43a2-b5e0-158bce07e56d}</Project>
       <Name>Test.Identity.Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />

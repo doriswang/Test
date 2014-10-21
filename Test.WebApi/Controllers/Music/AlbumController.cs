@@ -41,7 +41,7 @@ namespace Test.WebApi.Controllers
         }
 
         // POST: api/music/album
-        public IHttpActionResult Post([FromBody] AlbumModel album)
+        public IHttpActionResult Post(AlbumModel album)
         {
             if (album == null ||
                 album.Title.IsNullOrEmpty() ||
@@ -57,7 +57,7 @@ namespace Test.WebApi.Controllers
         }
 
         // PUT: api/music/album
-        public IHttpActionResult Put([FromBody] Album album)
+        public IHttpActionResult Put(AlbumModel album)
         {
             if (album == null ||
                 album.Id == 0 ||
