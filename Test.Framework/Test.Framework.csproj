@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{792F1DBC-264C-4E79-9C06-2762657EC523}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test.Framework</RootNamespace>
+    <AssemblyName>Test.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Couchbase, Version=1.3.9.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CouchbaseNetClient.1.3.9\lib\net40\Couchbase.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.36.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Dapper.1.36\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DapperExtensions, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Enyim.Caching, Version=1.3.9.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CouchbaseNetClient.1.3.9\lib\net40\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="LightInject, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\LightInject.3.0.2.0\lib\net45\LightInject.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="Munq.IocContainer">
+      <HintPath>..\packages\Munq.IocContainer.3.1.6\Lib\Munq.IocContainer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MySql.Data.6.9.3\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=4.0.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.4.0.32\lib\net40\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Interfaces.4.0.32\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=4.0.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Redis.4.0.32\lib\net40\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=4.0.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Text.4.0.32\lib\net40\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis.StrongName">
+      <HintPath>..\packages\StackExchange.Redis.StrongName.1.0.333\lib\net45\StackExchange.Redis.StrongName.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\CustomDescriptionAttribute.cs" />
+    <Compile Include="Attributes\GroupDescriptionAttribute.cs" />
+    <Compile Include="Attributes\ValidateModelStateAttribute.cs" />
+    <Compile Include="Caching\CacheRegister.cs" />
+    <Compile Include="Caching\CacheType.cs" />
+    <Compile Include="Caching\Cache\HttpRuntimeCache.cs" />
+    <Compile Include="Caching\Cache\ICache.cs" />
+    <Compile Include="Caching\Cache\MembaseCache.cs" />
+    <Compile Include="Caching\Cache\RedisCacheStackExchange.cs" />
+    <Compile Include="Caching\Cache\RedisCacheServiceStack.cs" />
+    <Compile Include="Caching\InProcCacher.cs" />
+    <Compile Include="Caching\Memcache\CouchbaseClientFactory.cs" />
+    <Compile Include="Caching\Memcache\DefaultBucketActivator.cs" />
+    <Compile Include="Caching\Memcache\ICouchbaseClientFactory.cs" />
+    <Compile Include="Caching\OutProcCacher.cs" />
+    <Compile Include="Caching\Redis\DefaultRedisActivator.cs" />
+    <Compile Include="Caching\Redis\IRedisClientFactory.cs" />
+    <Compile Include="Caching\Redis\RedisClientFactory.cs" />
+    <Compile Include="Common\Disposable.cs" />
+    <Compile Include="Configuration\FrameworkSettings.cs" />
+    <Compile Include="Configuration\IWebConfiguration.cs" />
+    <Compile Include="Configuration\Redis\CacheStrings.cs" />
+    <Compile Include="Configuration\Redis\CacheString.cs" />
+    <Compile Include="Configuration\Redis\RedisConfigSection.cs" />
+    <Compile Include="Configuration\WebConfiguration.cs" />
+    <Compile Include="CONSTANTS.cs" />
+    <Compile Include="DataAccess\Common\Connection.cs" />
+    <Compile Include="DataAccess\Base\BaseRepository.cs" />
+    <Compile Include="DataAccess\Common\SqlConnectionRegister.cs" />
+    <Compile Include="DataAccess\Orm\CustomOrm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataAccess\Orm\DapperOrm.cs" />
+    <Compile Include="DataAccess\Orm\OrmRegister.cs" />
+    <Compile Include="DataAccess\Base\Database.cs" />
+    <Compile Include="DataAccess\Base\DataReader.cs" />
+    <Compile Include="DataAccess\Custom\DataReaderEnumerator.cs" />
+    <Compile Include="DataAccess\Orm\CustomILOrm.cs" />
+    <Compile Include="DataAccess\Common\SqlDbType.cs" />
+    <Compile Include="DataAccess\Common\SqlDbRegister.cs" />
+    <Compile Include="DataAccess\Common\DbTypes.cs" />
+    <Compile Include="DataAccess\Common\DynamicQuery.cs" />
+    <Compile Include="DataAccess\Custom\IAutoIncrement.cs" />
+    <Compile Include="DataAccess\Custom\IConvertible.cs" />
+    <Compile Include="DataAccess\Orm\IOrm.cs" />
+    <Compile Include="DataAccess\Base\IDatabase.cs" />
+    <Compile Include="DataAccess\Custom\IDeleteable.cs" />
+    <Compile Include="DataAccess\Custom\IInsertable.cs" />
+    <Compile Include="DataAccess\Base\IRepository.cs" />
+    <Compile Include="DataAccess\Custom\ISelectable.cs" />
+    <Compile Include="DataAccess\Custom\IUpdateable.cs" />
+    <Compile Include="DataAccess\Common\CustomMapper.cs" />
+    <Compile Include="DataAccess\Orm\OrmType.cs" />
+    <Compile Include="DataAccess\Common\Parameter.cs" />
+    <Compile Include="DataAccess\Common\PropertyCache.cs" />
+    <Compile Include="DataAccess\Custom\QueryParameter.cs" />
+    <Compile Include="DataAccess\Custom\StringVariable.cs" />
+    <Compile Include="DataAccess\Common\SqlCommand.cs" />
+    <Compile Include="Extensibility\ChildContainer.cs" />
+    <Compile Include="Extensibility\Container.cs" />
+    <Compile Include="Extensibility\Web\CustomHttpControllerSelector.cs" />
+    <Compile Include="Extensibility\IChildContainer.cs" />
+    <Compile Include="Extensibility\ITypeResolver.cs" />
+    <Compile Include="Extensibility\LightInject\Lifetime\PerCachedLifetime.cs" />
+    <Compile Include="Extensibility\LightInject\Lifetime\PerSessionLifetime.cs" />
+    <Compile Include="Extensibility\LightInject\Lifetime\PerThreadLifetime.cs" />
+    <Compile Include="Extensibility\LightInject\LightInjectTypeResolver.cs" />
+    <Compile Include="Extensibility\Munq\MunqTypeResolver.cs" />
+    <Compile Include="Extensibility\ObjectLifeSpans.cs" />
+    <Compile Include="Extensions\ActionExtensions.cs" />
+    <Compile Include="Extensions\BrowserExtensions.cs" />
+    <Compile Include="Extensions\CommandExtensions.cs" />
+    <Compile Include="Extensions\CompareExtensions.cs" />
+    <Compile Include="Extensions\ConnectionExtensions.cs" />
+    <Compile Include="Extensions\DataReaderExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\GuidExtensions.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
+    <Compile Include="Extensions\ParameterExtensions.cs" />
+    <Compile Include="Extensions\ReaderWriterLockSlimExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\SqlCommandExtensions.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
+    <Compile Include="Framework.cs" />
+    <Compile Include="Handlers\Caching\Common\CacheKey.cs" />
+    <Compile Include="Handlers\Caching\Common\Helpers\BasicExtensions.cs" />
+    <Compile Include="Handlers\Caching\Common\Helpers\HttpHeadersExtensions.cs" />
+    <Compile Include="Handlers\Caching\Common\Helpers\HttpResponseMessageExtensions.cs" />
+    <Compile Include="Handlers\Caching\Common\HttpHeaderNames.cs" />
+    <Compile Include="Handlers\Caching\Common\Http\NotModifiedResponse.cs" />
+    <Compile Include="Handlers\Caching\Common\ICacheStore.cs" />
+    <Compile Include="Handlers\Caching\Common\IEntityTagStore.cs" />
+    <Compile Include="Handlers\Caching\Common\TimedEntityTagHeader.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\Memcached12\LengthedPrefixedString.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\Memcached12\MemcachedEntityTagStore12.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\Memcached\LengthedPrefixedString.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\Memcached\MemcachedEntityTagStore.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\MongoDb\MongoDbEntityTagStore.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\MongoDb\MonoEntiryStoreConnection.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\MongoDb\PersistentCacheKey.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\Redis\RedisEntityTagStore.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\SqlServer\ColumnNames.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\SqlServer\SqlServerEntityTagStore.cs" />
+    <Compile Include="Handlers\Caching\EntityTagStores\SqlServer\StoredProcedureNames.cs" />
+    <Compile Include="Handlers\Caching\Server\CacheControlPolicy\AttributeBasedCacheControlPolicy.cs" />
+    <Compile Include="Handlers\Caching\Server\CacheControlPolicy\CacheControlPolicyBase.cs" />
+    <Compile Include="Handlers\Caching\Server\CacheControlPolicy\HttpCacheControlPolicyAttribute.cs" />
+    <Compile Include="Handlers\Caching\Server\CacheControlPolicy\ICacheControlPolicy.cs" />
+    <Compile Include="Handlers\Caching\Server\CacheRefreshPolicy\AttributeBasedCacheRefreshPolicy.cs" />
+    <Compile Include="Handlers\Caching\Server\CacheRefreshPolicy\CacheRefreshPolicyBase.cs" />
+    <Compile Include="Handlers\Caching\Server\CacheRefreshPolicy\HttpCacheRefreshPolicyAttribute.cs" />
+    <Compile Include="Handlers\Caching\Server\CacheRefreshPolicy\ICacheRefreshPolicy.cs" />
+    <Compile Include="Handlers\Caching\Server\CachingHandler.cs" />
+    <Compile Include="Handlers\Caching\Server\Common\TaskHelperExtensions.cs" />
+    <Compile Include="Handlers\Caching\Server\Common\TaskHelpers.cs" />
+    <Compile Include="Handlers\Caching\Server\ETagGeneration\ContentHashETagAttribute.cs" />
+    <Compile Include="Handlers\Caching\Server\ETagGeneration\ContentHashETagGenerator.cs" />
+    <Compile Include="Handlers\Caching\Server\ETagGeneration\DefaultETagGenerator.cs" />
+    <Compile Include="Handlers\Caching\Server\ETagGeneration\IETagGenerator.cs" />
+    <Compile Include="Handlers\Caching\Server\ICachingHandler.cs" />
+    <Compile Include="Handlers\Caching\Server\InMemoryEntityTagStore.cs" />
+    <Compile Include="Handlers\Caching\Server\RoutePatternPolicy\ConventionalRoutePatternProvider.cs" />
+    <Compile Include="Handlers\Caching\Server\RoutePatternPolicy\IHierarchyExplorer.cs" />
+    <Compile Include="Handlers\Caching\Server\RoutePatternPolicy\IRoutePatternProvider.cs" />
+    <Compile Include="Handlers\Resource\EnrichingHandler.cs" />
+    <Compile Include="Handlers\Resource\IResponseEnricher.cs" />
+    <Compile Include="Handlers\Resource\Links\AlternateLink.cs" />
+    <Compile Include="Handlers\Resource\Links\CollectionLink.cs" />
+    <Compile Include="Handlers\Resource\Links\EditLink.cs" />
+    <Compile Include="Handlers\Resource\Links\EditMediaLink.cs" />
+    <Compile Include="Handlers\Resource\Links\FirstLink.cs" />
+    <Compile Include="Handlers\Resource\Links\LastLink.cs" />
+    <Compile Include="Handlers\Resource\Links\Link.cs" />
+    <Compile Include="Handlers\Resource\Links\NextLink.cs" />
+    <Compile Include="Handlers\Resource\Links\PreviousLink.cs" />
+    <Compile Include="Handlers\Resource\Links\RelatedLink.cs" />
+    <Compile Include="Handlers\Resource\Links\RUDLink.cs" />
+    <Compile Include="Handlers\Resource\Links\SelfLink.cs" />
+    <Compile Include="Handlers\Resource\ObjectContentResponseEnricher.cs" />
+    <Compile Include="Handlers\Resource\Resource.cs" />
+    <Compile Include="Handlers\Resource\ResponseEnricherExtensions.cs" />
+    <Compile Include="Handlers\Https\RequireHttpsHandler.cs" />
+    <Compile Include="Handlers\Compression\CompressedContent.cs" />
+    <Compile Include="Handlers\Compression\CompressionHandler.cs" />
+    <Compile Include="Handlers\Compression\Compressor.cs" />
+    <Compile Include="Handlers\Compression\DecompressionClientHandler.cs" />
+    <Compile Include="Handlers\Compression\DecompressionHandler.cs" />
+    <Compile Include="Handlers\Compression\DeflateCompressor.cs" />
+    <Compile Include="Handlers\Compression\GZipCompressor.cs" />
+    <Compile Include="Handlers\Compression\ICompressor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\JsonSerializer.cs" />
+    <Compile Include="Serialization\XmlSerializer.cs" />
+    <Compile Include="Session\HttpContextSessionStore.cs" />
+    <Compile Include="Session\ISessionStore.cs" />
+    <Compile Include="Tracing\Tracing.cs" />
+    <Compile Include="Validation\Check.cs" />
+    <Compile Include="Validation\Ensure.cs" />
+    <Compile Include="Validation\EntityValidator.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\Validation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Handlers\Caching\Common\Internal\" />
+    <Folder Include="Logging\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
