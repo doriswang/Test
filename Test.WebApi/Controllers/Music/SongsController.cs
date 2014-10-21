@@ -18,17 +18,21 @@ namespace Test.WebApi.Controllers
                 !songModels.IsNotNullOrEmpty())
                 return BadRequest();
 
-            var result = 0;
-
+            List<RequestResult<SongModel>> result = new List<RequestResult<SongModel>>();
             foreach (var song in songModels)
             {
-                result = songService.AddSong(albumId, song);
+                result.Add(songService.AddSong(albumId, song));
             }
 
-            if (result == 0)
+            if (result.Where(x => x.InternalServerError == true).Count() > 0)
                 return InternalServerError();
 
-            return Ok();
+            if (result.Where(x => x.Status != HttpStatusCode.OK).Count() > 0)
+                return InternalServerError();
+
+            var newResult = result.Where(x => x.Model != null).Select(x => x.Model).ToList();
+
+            return Ok<List<SongModel>>(newResult);
         }
     }
 }

@@ -67,17 +67,17 @@ namespace Test.Data.Repositories
 
         public bool AlbumExists(int albumId)
         { 
-            var sql = @"SELECT Id FROM [testdb].[dbo].[Albums] WHERE Id = @id;";
+            var sql = @"SELECT Id FROM [testdb].[dbo].[Albums] WHERE Id = @albumid;";
             List<Parameter> parameters = new List<Parameter>();
-            parameters.AddParameter("id", albumId);
+            parameters.AddParameter("albumid", albumId);
             return this.Database.Select<Album>(sql, parameters).IsNotNullOrEmpty();
         }
 
         public bool SongExists(int albumId, int songId)
         { 
-            var sql = @"SELECT Id FROM [testdb].[dbo].[Songs] WHERE Id = @id AND AlbumId = @albumid;";
+            var sql = @"SELECT Id FROM [testdb].[dbo].[Songs] WHERE Id = @songid AND AlbumId = @albumid;";
             List<Parameter> parameters = new List<Parameter>();
-            parameters.AddParameter("id", songId);
+            parameters.AddParameter("songid", songId);
             parameters.AddParameter("albumid", albumId);
             return this.Database.Select<Song>(sql, parameters).IsNotNullOrEmpty();
         }
@@ -164,12 +164,12 @@ namespace Test.Data.Repositories
                                 ArtistName=@artistname, 
                                 Title=@title
                             WHERE
-                                Id = @id;";
+                                Id = @albumid;";
 
             List<Parameter> parameters = new List<Parameter>();
             parameters.AddParameter("artistname", album.ArtistName);
             parameters.AddParameter("title", album.Title);
-            parameters.AddParameter("id", album.Id);
+            parameters.AddParameter("albumid", album.Id);
 
             return this.Database.Execute(new List<SqlCommand> { new SqlCommand(sql, parameters) });
         }
@@ -181,24 +181,13 @@ namespace Test.Data.Repositories
 
         public bool UpdateSong(int albumId, Song song)
         {
+            if (song == null)
+                return false;
+
             if (song.AlbumId == 0)
                 song.AlbumId = albumId;
 
-            var currentSong = GetSong(song.Id, albumId);
-
-            if (currentSong == null)
-                return false;
-
-            if (song.Title.IsNotNullOrEmpty())
-                currentSong.Title = song.Title;
-            if (song.Length.IsNotNullOrEmpty())
-                currentSong.Length = song.Length;
-            if (song.TrackNumber != 0)
-                currentSong.TrackNumber = song.TrackNumber;
-            if (song.Genre.IsNotNullOrEmpty())
-                currentSong.Genre = song.Genre;
-
-            currentSong.DateModified = DateTime.Now;
+            song.DateModified = DateTime.Now;
 
             var sql = @"
                             UPDATE 
@@ -210,17 +199,17 @@ namespace Test.Data.Repositories
                                 Genre = @genre, 
                                 DateModified = @datemodified 
                             WHERE 
-                                Id = @id
+                                Id = @songid
                             AND
                                 AlbumId = @albumid;";
 
             List<Parameter> parameters = new List<Parameter>();
-            parameters.AddParameter("title", currentSong.Title);
-            parameters.AddParameter("length", currentSong.Length);
-            parameters.AddParameter("tracknumber", currentSong.TrackNumber);
-            parameters.AddParameter("genre", currentSong.Genre);
-            parameters.AddParameter("datemodified", currentSong.DateModified);
-            parameters.AddParameter("id", currentSong.Id);
+            parameters.AddParameter("title", song.Title);
+            parameters.AddParameter("length", song.Length);
+            parameters.AddParameter("tracknumber", song.TrackNumber);
+            parameters.AddParameter("genre", song.Genre);
+            parameters.AddParameter("datemodified", song.DateModified);
+            parameters.AddParameter("songid", song.Id);
             parameters.AddParameter("albumid", albumId);
 
             return this.Database.Execute(new List<SqlCommand> { new SqlCommand(sql, parameters) });
@@ -277,22 +266,22 @@ namespace Test.Data.Repositories
 
         public bool DeleteAlbum(Album album)
         {
-            return this.Database.Delete<Album>(album);
+            return DeleteAlbum(album.Id);
         }
 
         public bool DeleteAlbum(int albumId)
         {
-            var sql = @"DELETE FROM [testdb].[dbo].[Albums] WHERE Id = @id;";
+            var sql = @"DELETE FROM [testdb].[dbo].[Albums] WHERE Id = @albumid;";
             List<Parameter> parameters = new List<Parameter>();
-            parameters.AddParameter("id", albumId);
+            parameters.AddParameter("albumid", albumId);
             return this.Database.Execute(new List<SqlCommand> { new SqlCommand(sql, parameters) });
         }
 
         public bool DeleteSong(int albumId)
         {
-            var sql = @"DELETE FROM [testdb].[dbo].[Songs] WHERE AlbumId = @albumId";
+            var sql = @"DELETE FROM [testdb].[dbo].[Songs] WHERE AlbumId = @albumid";
             List<Parameter> parameters = new List<Parameter>();
-            parameters.AddParameter("albumId", albumId);
+            parameters.AddParameter("albumid", albumId);
             return this.Database.Execute(new List<SqlCommand> { new SqlCommand(sql, parameters) });
         }
 
@@ -308,9 +297,9 @@ namespace Test.Data.Repositories
 
         public bool DeleteSong(int albumId, int songId)
         {
-            var sql = @"DELETE FROM [testdb].[dbo].[Songs] WHERE Id = @id AND AlbumId = @albumid;";
+            var sql = @"DELETE FROM [testdb].[dbo].[Songs] WHERE Id = @songid AND AlbumId = @albumid;";
             List<Parameter> parameters = new List<Parameter>();
-            parameters.AddParameter("id", songId);
+            parameters.AddParameter("songid", songId);
             parameters.AddParameter("albumid", albumId);
             return this.Database.Execute(new List<SqlCommand> { new SqlCommand(sql, parameters) });
         }

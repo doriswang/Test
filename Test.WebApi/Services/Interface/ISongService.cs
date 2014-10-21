@@ -12,10 +12,10 @@ namespace Test.WebApi.Services
         SongModel GetSong(int albumId, int id);
         IEnumerable<SongModel> GetSong(int albumId);
         IEnumerable<SongModel> GetSong(string artistName);
-        int AddSong(int albumId, SongModel songModel);
-        bool UpdateSong(int albumId, SongModel songModel);
-        bool DeleteSong(int albumId);
-        bool DeleteSong(int albumId, int songId);
-        bool DeleteSong(int albumId, SongModel songModel);
+        RequestResult<SongModel> AddSong(int albumId, SongModel songModel);
+        RequestResult<SongModel> UpdateSong(int albumId, SongModel songModel);
+        RequestResult<SongModel> DeleteSong(int albumId);
+        RequestResult<SongModel> DeleteSong(int albumId, int songId);
+        RequestResult<SongModel> DeleteSong(int albumId, SongModel songModel);
     }
 }

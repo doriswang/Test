@@ -9,6 +9,7 @@ using Test.Framework.Extensions;
 using AutoMapper;
 using Test.Entities.Entity.Songs;
 using Test.WebApi.Models;
+using System.Net;
 
 namespace Test.WebApi.Services
 {
@@ -105,59 +106,91 @@ namespace Test.WebApi.Services
             return result;
         }
 
-        public int AddAlbum(AlbumModel albumModel)
+        public RequestResult<AlbumModel> AddAlbum(AlbumModel albumModel)
         {
             if (albumModel == null)
-                return 0;
+                return new RequestResult<AlbumModel>(HttpStatusCode.BadRequest);
 
             Mapper.CreateMap<AlbumModel, Album>();
             var album = Mapper.Map<Album>(albumModel);
 
-            var result = repository.AddAlbum(album);
+            var albumId = repository.AddAlbum(album);
+            albumModel.Id = albumId;
 
             if (!albumModel.Songs.IsNotNullOrEmpty())
-                return result;
+                return new RequestResult<AlbumModel>(albumModel);
 
             Mapper.CreateMap<SongModel, Song>();
 
-            var songResult = 0;
+            List<SongModel> songResult = new List<SongModel>();
+            var counter = 0;
             foreach (var songModel in albumModel.Songs)
             {
-                songResult += songService.AddSong(result, songModel);
+                if (songModel == null)
+                {
+                    counter++;
+                    continue;
+                }
+
+                var tempResult = songService.AddSong(albumId, songModel);
+
+                if (tempResult.Status != HttpStatusCode.OK ||
+                    tempResult.Model == null)
+                {
+                    counter++;
+                    continue;
+                }
+
+                albumModel.Songs[counter] = tempResult.Model;
+
+                counter++;
             }
 
-            return result;
+            return new RequestResult<AlbumModel>(albumModel);
         }
 
-        public bool UpdateAlbum(AlbumModel albumModel)
+        public RequestResult<AlbumModel> UpdateAlbum(AlbumModel albumModel)
         {
             var currentAlbum = repository.GetAlbum(albumModel.Id);
             if (currentAlbum == null)
-                return false;
+                return new RequestResult<AlbumModel>(HttpStatusCode.NotFound);
 
             Mapper.CreateMap<AlbumModel, Album>();
             currentAlbum = Mapper.Map<Album>(albumModel);
 
-            var result = repository.UpdateAlbum(currentAlbum);
-            return result;
+            var repoResult = repository.UpdateAlbum(currentAlbum);
+            if (!repoResult)
+                return new RequestResult<AlbumModel>("Cannot Update Album");
+
+            Mapper.CreateMap<Album, AlbumModel>();
+            var result = Mapper.Map<AlbumModel>(currentAlbum);
+
+            return new RequestResult<AlbumModel>(result);
         }
 
-        public bool DeleteAlbum(AlbumModel albumModel)
+        public RequestResult<AlbumModel> DeleteAlbum(int albumId)
         {
-            if (albumModel == null ||
-                albumModel.Id == 0)
-                return false;
+            return DeleteAlbum(new AlbumModel { Id = albumId });
+        }
 
-            var currentAlbum = repository.AlbumExists(albumModel.Id);
+        public RequestResult<AlbumModel> DeleteAlbum(AlbumModel albumModel)
+        {
+            if (albumModel == null || albumModel.Id == 0)
+                return new RequestResult<AlbumModel>(HttpStatusCode.BadRequest);
 
-            if (!currentAlbum)
-                return false;
+            if (!repository.AlbumExists(albumModel.Id))
+                return new RequestResult<AlbumModel>(HttpStatusCode.NotFound);
 
             if (HasSongs(albumModel.Id))
-                return false;
+            {
+                var songResult = songService.DeleteSong(albumModel.Id);
+                if (songResult.Status != HttpStatusCode.OK)
+                    return new RequestResult<AlbumModel>("Cannot delete Album's Songs");
+            }
 
             var result = repository.DeleteAlbum(albumModel.Id);
-            return result;
+
+            return new RequestResult<AlbumModel>();
         }
 
         public bool HasSongs(int albumId) 

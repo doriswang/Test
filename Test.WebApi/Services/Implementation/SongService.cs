@@ -9,6 +9,7 @@ using Test.Framework.Extensions;
 using Test.WebApi.Models;
 using AutoMapper;
 using Test.Entities.Entity.Songs;
+using System.Net;
 
 namespace Test.WebApi.Services
 {
@@ -85,7 +86,7 @@ namespace Test.WebApi.Services
             return result;
         }
 
-        public int AddSong(int albumId, SongModel songModel)
+        public RequestResult<SongModel> AddSong(int albumId, SongModel songModel)
         {
             Mapper.CreateMap<SongModel, Song>();
             var song = Mapper.Map<Song>(songModel);
@@ -95,40 +96,74 @@ namespace Test.WebApi.Services
 
             var result = repository.AddSong(albumId, song);
 
-            return result;
+            if (result == 0)
+                return new RequestResult<SongModel>("Cannot Add Song");
+
+            songModel.Id = result;
+
+            return new RequestResult<SongModel>(songModel);
         }
 
-        public bool UpdateSong(int albumId, SongModel songModel)
+        public RequestResult<SongModel> UpdateSong(int albumId, SongModel songModel)
         {
-            Mapper.CreateMap<SongModel, Song>();
-            var song = Mapper.Map<Song>(songModel);
+            if (albumId == 0 ||
+                songModel.Id == 0)
+                return new RequestResult<SongModel>(HttpStatusCode.BadRequest);
 
-            if (song.AlbumId == 0)
-                song.AlbumId = albumId;
+            var song = repository.GetSong(albumId, songModel.Id);
+
+            if(song == null)
+                return new RequestResult<SongModel>(HttpStatusCode.NotFound);
+
+            Mapper.CreateMap<SongModel, Song>();
+            song = Mapper.Map<Song>(songModel);
 
             var result = repository.UpdateSong(albumId, song);
 
-            return result;
+            if (!result)
+                return new RequestResult<SongModel>("Cannot Update Song");
+
+            Mapper.CreateMap<Song, SongModel>();
+            songModel = Mapper.Map<SongModel>(song);
+
+            return new RequestResult<SongModel>(songModel);
         }
-        public bool DeleteSong(int albumId)
+
+        public RequestResult<SongModel> DeleteSong(int albumId)
         {
-            var albumExists = repository.AlbumExists(albumId);
+            if (albumId == 0)
+                return new RequestResult<SongModel>(HttpStatusCode.BadRequest);
 
-            if (!albumExists)
-                return false;
+            if (!repository.AlbumExists(albumId))
+                return new RequestResult<SongModel>(HttpStatusCode.NotFound);
 
-            var result = repository.DeleteSong(albumId);
+            if(!repository.SongExists(albumId))
+                return new RequestResult<SongModel>(HttpStatusCode.NotFound);
 
-            return result;
+            if (!repository.DeleteSong(albumId))
+                return new RequestResult<SongModel>("Cannot Delete Song");
+
+            return new RequestResult<SongModel>();
         }
 
-        public bool DeleteSong(int albumId, int songId)
+        public RequestResult<SongModel> DeleteSong(int albumId, int songId)
         {
-            var result = repository.DeleteSong(albumId, songId);
-            return result;
+            if (albumId == 0)
+                return new RequestResult<SongModel>(HttpStatusCode.BadRequest);
+
+            if (!repository.AlbumExists(albumId))
+                return new RequestResult<SongModel>(HttpStatusCode.NotFound);
+
+            if (!repository.SongExists(albumId, songId))
+                return new RequestResult<SongModel>(HttpStatusCode.NotFound);
+
+            if (!repository.DeleteSong(albumId, songId))
+                return new RequestResult<SongModel>("Cannot Delete Song");
+
+            return new RequestResult<SongModel>(); ;
         }
 
-        public bool DeleteSong(int albumId, SongModel songModel)
+        public RequestResult<SongModel> DeleteSong(int albumId, SongModel songModel)
         {
             return DeleteSong(albumId, songModel.Id);
         }

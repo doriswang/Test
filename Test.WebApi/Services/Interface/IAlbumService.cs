@@ -11,9 +11,10 @@ namespace Test.WebApi.Services
         AlbumModel GetAlbum(int id);
         IEnumerable<AlbumModel> GetAlbum(string artistName);
         IEnumerable<AlbumModel> GetAlbum(AlbumInputModel inputModel);
-        int AddAlbum(AlbumModel albumModel);
-        bool UpdateAlbum(AlbumModel albumModel);
-        bool DeleteAlbum(AlbumModel albumModel);
+        RequestResult<AlbumModel> AddAlbum(AlbumModel albumModel);
+        RequestResult<AlbumModel> UpdateAlbum(AlbumModel albumModel);
+        RequestResult<AlbumModel> DeleteAlbum(int albumId);
+        RequestResult<AlbumModel> DeleteAlbum(AlbumModel albumModel);
 
         bool HasSongs(int albumId);
         bool HasSongs(AlbumModel albumModel);

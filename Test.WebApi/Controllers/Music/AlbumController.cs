@@ -50,8 +50,14 @@ namespace Test.WebApi.Controllers
 
             var result = albumService.AddAlbum(album);
 
-            if (result == 0)
+            if (result.InternalServerError)
                 return InternalServerError();
+
+            if (result.Status != HttpStatusCode.OK)
+                return (IHttpActionResult)new HttpResponseMessage(result.Status);
+
+            if (result.Model != null)
+                return Ok<AlbumModel>(result.Model);
 
             return Ok();
         }
@@ -69,8 +75,14 @@ namespace Test.WebApi.Controllers
 
             var result = albumService.UpdateAlbum(album);
 
-            if (!result)
+            if (result.InternalServerError)
                 return InternalServerError();
+
+            if (result.Status != HttpStatusCode.OK)
+                return (IHttpActionResult)new HttpResponseMessage(result.Status);
+
+            if (result.Model != null)
+                return Ok<AlbumModel>(result.Model);
 
             return Ok();
         }
@@ -81,10 +93,13 @@ namespace Test.WebApi.Controllers
             if (id == 0)
                 return BadRequest();
 
-            var result = musicRepository.DeleteAlbum(id);
+            var result = albumService.DeleteAlbum(id);
 
-            if (!result)
+            if (result.InternalServerError)
                 return InternalServerError();
+
+            if (result.Status != HttpStatusCode.OK)
+                return (IHttpActionResult)new HttpResponseMessage(result.Status);
 
             return Ok();
         }
