@@ -39,7 +39,7 @@ namespace Test.WebApi.Controllers
                 return InternalServerError();
 
             if (result.Status != HttpStatusCode.OK)
-                return (IHttpActionResult)new HttpResponseMessage(result.Status);
+                return ResponseMessage(new HttpResponseMessage(result.Status));
 
             if (result.Model != null)
                 return Ok<ArtistModel>(result.Model);
@@ -48,7 +48,7 @@ namespace Test.WebApi.Controllers
         }
 
         // PUT: api/music/artist
-        public IHttpActionResult Put(ArtistModel artistModel)
+        public IHttpActionResult Put(ArtistModel artistModel, int albumId = 0, int songId = 0)
         {
             if (artistModel == null ||
                 artistModel.Name.IsNullOrEmpty())
@@ -60,7 +60,7 @@ namespace Test.WebApi.Controllers
                 return InternalServerError();
 
             if (result.Status != HttpStatusCode.OK)
-                return (IHttpActionResult)new HttpResponseMessage(result.Status);
+                return ResponseMessage(new HttpResponseMessage(result.Status));
 
             if (result.Model != null)
                 return Ok<ArtistModel>(result.Model);
@@ -80,7 +80,7 @@ namespace Test.WebApi.Controllers
                 return InternalServerError();
 
             if (result.Status != HttpStatusCode.OK)
-                return (IHttpActionResult)new HttpResponseMessage(result.Status);
+                return ResponseMessage(new HttpResponseMessage(result.Status));
 
             return Ok();
         }

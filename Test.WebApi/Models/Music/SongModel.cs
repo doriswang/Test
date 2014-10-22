@@ -10,10 +10,8 @@ namespace Test.WebApi.Models
 {
     public class SongModel : Resource, IDataModel
     {
-        [JsonIgnore]
         public int Id { get; set; }
 
-        [JsonIgnore]
         public int AlbumId { get; set; }
 
         public string Title { get; set; }

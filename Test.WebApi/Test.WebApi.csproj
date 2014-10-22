@@ -231,6 +231,7 @@
     <Compile Include="Middleware\AuthProvider\SigningCredentialsProvider.cs" />
     <Compile Include="Middleware\AuthProvider\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Middleware\Format\CustomJwtFormat.cs" />
+    <Compile Include="Middleware\MappingExpressionExtensions.cs" />
     <Compile Include="Models\Music\ArtistModel.cs" />
     <Compile Include="Models\Authentication\ChallengeResult.cs" />
     <Compile Include="Models\Authentication\UserModel.cs" />

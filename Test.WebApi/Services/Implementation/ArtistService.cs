@@ -88,6 +88,17 @@ namespace Test.WebApi.Services
                 albumsToEdit.AddRange(artistModel.Albums.Select(x => { x.ArtistName = artistModel.Name; return x; }).ToList());
             }
 
+            List<SongModel> songsToEdit = new List<SongModel>();
+            songsToEdit = albumsToEdit.SelectMany(x => x.Songs.Select(y => { if (y.AlbumId == 0) { y.AlbumId = x.Id; } return y; })).ToList();
+
+            List<SongModel> songsEdited = new List<SongModel>();
+            foreach (var song in songsToEdit)
+            {
+                var tempResult = songService.UpdateSong(song.AlbumId, song);
+                if (tempResult.Model != null)
+                    songsEdited.Add(tempResult.Model);
+            }
+
             List<RequestResult<AlbumModel>> albumResult = new List<RequestResult<AlbumModel>>();
             artistModel.Albums = new List<AlbumModel>();
             foreach (var album in albumsToEdit)
@@ -96,8 +107,11 @@ namespace Test.WebApi.Services
 
                 albumResult.Add(tempResult);
 
-                if(tempResult.Model != null)
-                    artistModel.Albums.Add(tempResult.Model);
+                if (tempResult.Model == null)
+                    continue;
+
+                tempResult.Model.Songs = songsEdited.Where(x => x.AlbumId == tempResult.Model.Id).ToList();
+                artistModel.Albums.Add(tempResult.Model);
             }
 
             if (albumResult.Where(x => x.InternalServerError == true).Count() > 0)

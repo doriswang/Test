@@ -11,7 +11,6 @@ namespace Test.WebApi.Models
 {
     public class AlbumModel : Resource, IDataModel
     {
-        [JsonIgnore]
         public int Id { get; set; }
         public string Title { get; set; }
         public string ArtistName { get; set; }

@@ -21,6 +21,7 @@ namespace Test.WebApi.Controllers
             List<RequestResult<SongModel>> result = new List<RequestResult<SongModel>>();
             foreach (var song in songModels)
             {
+                song.AlbumId = albumId;
                 result.Add(songService.AddSong(albumId, song));
             }
 

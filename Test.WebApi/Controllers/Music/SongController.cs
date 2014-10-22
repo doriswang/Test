@@ -56,7 +56,7 @@ namespace Test.WebApi.Controllers
                 return InternalServerError();
 
             if (result.Status != HttpStatusCode.OK)
-                return (IHttpActionResult)new HttpResponseMessage(result.Status);
+                return ResponseMessage(new HttpResponseMessage(result.Status));
 
             if (result.Model != null)
                 return Ok<SongModel>(result.Model);
@@ -81,7 +81,7 @@ namespace Test.WebApi.Controllers
                 return InternalServerError();
 
             if (result.Status != HttpStatusCode.OK)
-                return (IHttpActionResult)new HttpResponseMessage(result.Status);
+                return ResponseMessage(new HttpResponseMessage(result.Status));
 
             if (result.Model != null)
                 return Ok<SongModel>(result.Model);
@@ -101,7 +101,7 @@ namespace Test.WebApi.Controllers
                 return InternalServerError();
 
             if (result.Status != HttpStatusCode.OK)
-                return (IHttpActionResult)new HttpResponseMessage(result.Status);
+                return ResponseMessage(new HttpResponseMessage(result.Status));
 
             if (result.Model != null)
                 return Ok<SongModel>(result.Model);
@@ -122,7 +122,7 @@ namespace Test.WebApi.Controllers
                 return InternalServerError();
 
             if (result.Status != HttpStatusCode.OK)
-                return (IHttpActionResult)new HttpResponseMessage(result.Status);
+                return ResponseMessage(new HttpResponseMessage(result.Status));
 
             return Ok();
         }

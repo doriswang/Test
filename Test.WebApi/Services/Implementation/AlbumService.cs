@@ -6,6 +6,7 @@ using Test.Data;
 using Test.Data.Repositories;
 using Test.Framework.Extensibility;
 using Test.Framework.Extensions;
+using Test.WebApi.Middleware;
 using AutoMapper;
 using Test.Entities.Entity.Songs;
 using Test.WebApi.Models;
@@ -124,7 +125,8 @@ namespace Test.WebApi.Services
 
             List<SongModel> songResult = new List<SongModel>();
             var counter = 0;
-            foreach (var songModel in albumModel.Songs)
+            var albumSongs = albumModel.Songs.Where(x => x != null).ToList();
+            foreach (var songModel in albumSongs)
             {
                 if (songModel == null)
                 {
@@ -138,7 +140,7 @@ namespace Test.WebApi.Services
                     tempResult.Model == null)
                 {
                     counter++;
-                    continue;
+                    continue;;
                 }
 
                 albumModel.Songs[counter] = tempResult.Model;
@@ -163,9 +165,10 @@ namespace Test.WebApi.Services
                 return new RequestResult<AlbumModel>("Cannot Update Album");
 
             Mapper.CreateMap<Album, AlbumModel>();
-            var result = Mapper.Map<AlbumModel>(currentAlbum);
-
-            return new RequestResult<AlbumModel>(result);
+            var songs = albumModel.Songs;
+            albumModel = Mapper.Map<AlbumModel>(currentAlbum);
+            albumModel.Songs = songs;
+            return new RequestResult<AlbumModel>(albumModel);
         }
 
         public RequestResult<AlbumModel> DeleteAlbum(int albumId)
