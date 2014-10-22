@@ -8,22 +8,36 @@ using Test.Data.Repositories;
 using Test.Framework.Extensibility;
 using Test.Framework.Extensions;
 using Test.WebApi.Models;
+using Test.WebApi.Enums;
+using Test.Data.File.Xml;
 
 namespace Test.WebApi.Services
 {
     public class ArtistService : IArtistService
     {
-        public ArtistService()
+        public ArtistService(IDataProvider provider, ISongService songService, IAlbumService albumService)
         {
-            this.provider = Container.Resolve<IDataProvider>();
-            this.repository = provider.MusicRepository;
-            this.albumService = Container.Resolve<IAlbumService>();
-            this.songService = Container.Resolve<ISongService>();
+            this.provider = provider;
+            this.songService = songService;
+            this.albumService = albumService;
         }
 
         public IDataProvider provider { get; set; }
 
-        public IMusicRepository repository { get; set; }
+        public IMusicRepository repository
+        {
+            get
+            {
+                switch (AppSettings.DataSource)
+                {
+                    case DataSourceType.File:
+                        return Container.Resolve<XmlMusicRepository>();
+                    case DataSourceType.Db:
+                    default:
+                        return provider.MusicRepository;
+                }
+            }
+        }
 
         public IAlbumService albumService { get; set; }
 

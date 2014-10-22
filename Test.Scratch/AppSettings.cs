@@ -4,9 +4,8 @@ using System.Linq;
 using System.Web;
 using Test.Framework.Configuration;
 using Test.Framework.Extensibility;
-using Test.WebApi.Enums;
 
-namespace Test.WebApi
+namespace Test.Scratch
 {
     public static class AppSettings
     {
@@ -24,16 +23,5 @@ namespace Test.WebApi
         public static string XMLSongFile { get { return XML + config.AppSettings["File:Xml:Song"]; } }
         public static string JSONAlbumFile { get { return JSON + config.AppSettings["File:Json:Album"]; } }
         public static string JSONSongFile { get { return JSON + config.AppSettings["File:Json:Song"]; } }
-        public static DataSourceType DataSource {
-            get
-            {
-                if (config.AppSettings["DataSource:Type"].ToLowerInvariant().Equals("db"))
-                    return DataSourceType.Db;
-                else if (config.AppSettings["DataSource:Type"].ToLowerInvariant().Equals("file"))
-                    return DataSourceType.File;
-                else
-                    return DataSourceType.Db;
-            }
-        }
     }
 }

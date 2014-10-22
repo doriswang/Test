@@ -11,6 +11,8 @@ using AutoMapper;
 using Test.Entities.Entity.Songs;
 using Test.WebApi.Models;
 using System.Net;
+using Test.WebApi.Enums;
+using Test.Data.File.Xml;
 
 namespace Test.WebApi.Services
 {
@@ -19,12 +21,25 @@ namespace Test.WebApi.Services
         public AlbumService(IDataProvider dataprovider, ISongService songService)
         {
             this.provider = dataprovider;
-            this.repository = provider.MusicRepository;
             this.songService = songService;
         }
 
         public IDataProvider provider { get; set; }
-        public IMusicRepository repository { get; set; }
+        public IMusicRepository repository
+        {
+            get
+            {
+                switch (AppSettings.DataSource)
+                {
+                    case DataSourceType.File:
+                        return Container.Resolve<XmlMusicRepository>();
+                    case DataSourceType.Db:
+                    default:
+                        return provider.MusicRepository;
+                }
+            }
+        }
+
         public ISongService songService { get; set; }
 
         #region IAlbumService Members
@@ -208,8 +223,6 @@ namespace Test.WebApi.Services
         }
 
         #endregion
-
-
 
     }
 }

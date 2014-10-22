@@ -10,6 +10,8 @@ using Test.WebApi.Models;
 using AutoMapper;
 using Test.Entities.Entity.Songs;
 using System.Net;
+using Test.WebApi.Enums;
+using Test.Data.File.Xml;
 
 namespace Test.WebApi.Services
 {
@@ -18,12 +20,24 @@ namespace Test.WebApi.Services
         public SongService()
         {
             this.provider = Container.Resolve<IDataProvider>();
-            this.repository = provider.MusicRepository;
         }
 
         public IDataProvider provider { get; private set; }
 
-        public IMusicRepository repository { get; private set; }
+        public IMusicRepository repository
+        {
+            get
+            {
+                switch (AppSettings.DataSource)
+                {
+                    case DataSourceType.File:
+                        return Container.Resolve<XmlMusicRepository>();
+                    case DataSourceType.Db:
+                    default:
+                        return provider.MusicRepository;
+                }
+            }
+        }
 
         public SongModel GetSong(int albumId, int id)
         {

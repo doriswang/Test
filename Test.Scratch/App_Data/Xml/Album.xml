@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAlbum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Album>
+    <Id>1</Id>
+    <Title>Prism</Title>
+    <ArtistName>Katy Perry</ArtistName>
+  </Album>
+  <Album>
+    <Id>2</Id>
+    <Title>Teenage Dream</Title>
+    <ArtistName>Katy Perry</ArtistName>
+  </Album>
+  <Album>
+    <Id>3</Id>
+    <Title>Gumma</Title>
+    <ArtistName>Sura</ArtistName>
+  </Album>
+  <Album>
+    <Id>4</Id>
+    <Title>Summa</Title>
+    <ArtistName>Sura</ArtistName>
+  </Album>
+  <Album>
+    <Id>5</Id>
+    <Title>Summa</Title>
+    <ArtistName>Sura</ArtistName>
+  </Album>
+  <Album>
+    <Id>6</Id>
+    <Title>Summa</Title>
+    <ArtistName>Sura</ArtistName>
+  </Album>
+</ArrayOfAlbum>

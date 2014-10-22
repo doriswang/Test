@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Test.Data;
+using Test.Data.File.Xml;
+using Test.Data.Repositories;
 using Test.Framework.Extensibility;
 using Test.Framework.Handlers.Resource;
 using Test.Identity;
@@ -21,7 +23,10 @@ namespace Test.WebApi
             DataAccessLayer.Initialize();
             TestIdentityProvider.Initialize();
             Container.Register<ISigningCredentialsProvider, SigningCredentialsProvider>();
-
+            Container.RegisterInstance<IMusicRepository, XmlMusicRepository>(
+                "XmlRepository", 
+                new XmlMusicRepository(AppSettings.XMLAlbumFile, AppSettings.XMLSongFile), 
+                ObjectLifeSpans.Singleton);
             ServiceRegistry();
         }
 

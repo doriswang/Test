@@ -223,6 +223,7 @@
     <Compile Include="Controllers\Music\AlbumController.cs" />
     <Compile Include="Controllers\Music\SongController.cs" />
     <Compile Include="Controllers\Music\SongsController.cs" />
+    <Compile Include="Enums\DataSourceType.cs" />
     <Compile Include="Extensions\JwtAuthenticationExtensions.cs" />
     <Compile Include="Extensions\RouteExtensions.cs" />
     <Compile Include="Middleware\Attribute\CustomAuthorizationFilterAttribute.cs" />
@@ -259,6 +260,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Test.Data.File\Test.Data.File.csproj">
+      <Project>{6fdbace5-e7f5-414e-8af9-d637ae0f44f3}</Project>
+      <Name>Test.Data.File</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Test.Data\Test.Data.csproj">
       <Project>{fd899ba5-6fd8-4a24-b541-f029b098439e}</Project>
       <Name>Test.Data</Name>

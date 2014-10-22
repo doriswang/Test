@@ -8,6 +8,8 @@ using Test.Data.Repositories;
 using Test.Framework.Extensibility;
 using Test.Framework.Extensions;
 using Test.WebApi.Models;
+using Test.WebApi.Enums;
+using Test.Data.File.Xml;
 
 namespace Test.WebApi.Services
 {
@@ -16,7 +18,6 @@ namespace Test.WebApi.Services
         public MusicService(IDataProvider provider, ISongService songService, IAlbumService albumService, IArtistService artistService)
         {
             this.provider = provider;
-            this.repository = provider.MusicRepository;
             this.songService = songService;
             this.albumService = albumService;
             this.artistService = artistService;
@@ -24,7 +25,20 @@ namespace Test.WebApi.Services
 
         public IDataProvider provider { get; set; }
 
-        public IMusicRepository repository { get; set; }
+        public IMusicRepository repository
+        {
+            get
+            {
+                switch (AppSettings.DataSource)
+                {
+                    case DataSourceType.File:
+                        return Container.Resolve<XmlMusicRepository>();
+                    case DataSourceType.Db:
+                    default:
+                        return provider.MusicRepository;
+                }
+            }
+        }
 
         public ISongService songService { get; set; }
 
