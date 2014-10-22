@@ -14,6 +14,8 @@ namespace Test.Data.Repositories
         bool SongExists(int albumId, int songId);
         bool SongExists(int albumId);
 
+        IEnumerable<string> GetArtistNames();
+
         Album GetAlbum(int albumId);
         IEnumerable<Album> GetAlbum(string artistName);
         IEnumerable<int> GetAlbumIds(string artistName);

@@ -45,6 +45,7 @@ namespace Test.WebApi
             config.AddResponseEnrichers(new AlbumResponseEnricher());
             config.AddResponseEnrichers(new SongResponseEnricher());
             config.AddResponseEnrichers(new ArtistResponseEnricher());
+            config.AddResponseEnrichers(new MusicResponseEnricher());
         }
 
         private static void ConfigureMessageHandlers(HttpConfiguration config)
@@ -84,6 +85,10 @@ namespace Test.WebApi
 
         private static void ConfigureMediaFormatters(HttpConfiguration config)
         {
+            var xmlFormatter = config.Formatters.XmlFormatter;
+            xmlFormatter.UseXmlSerializer = true;
+            xmlFormatter.Indent = true;
+
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             CreateMediaTypes(jsonFormatter);

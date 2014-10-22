@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Test.Data;
 using Test.Framework.Extensibility;
+using Test.Framework.Handlers.Resource;
 using Test.Identity;
 using Test.WebApi.Middleware;
 using Test.WebApi.Services;
@@ -29,6 +30,7 @@ namespace Test.WebApi
             Container.Register<ISongService, SongService>();
             Container.Register<IAlbumService, AlbumService>();
             Container.Register<IArtistService, ArtistService>();
+            Container.Register<IMusicService, MusicService>();
         }
     }
 }

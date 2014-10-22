@@ -156,6 +156,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Cors">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.2\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -212,6 +213,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Music\MusicController.cs" />
     <Compile Include="Controllers\Music\ArtistController.cs" />
     <Compile Include="Controllers\Authentication\AccountController.cs" />
     <Compile Include="Controllers\Authentication\AuthenticationUserController.cs" />
@@ -232,12 +234,14 @@
     <Compile Include="Middleware\AuthProvider\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Middleware\Format\CustomJwtFormat.cs" />
     <Compile Include="Middleware\MappingExpressionExtensions.cs" />
+    <Compile Include="Models\Music\MusicModel.cs" />
     <Compile Include="Models\Music\ArtistModel.cs" />
     <Compile Include="Models\Authentication\ChallengeResult.cs" />
     <Compile Include="Models\Authentication\UserModel.cs" />
     <Compile Include="Models\Music\AlbumInputModel.cs" />
     <Compile Include="Models\Music\AlbumModel.cs" />
     <Compile Include="Models\Music\SongModel.cs" />
+    <Compile Include="Models\ResponseEnrichers\Music\MusicResponseEnricher.cs" />
     <Compile Include="Models\ResponseEnrichers\Music\AlbumResponseEnricher.cs" />
     <Compile Include="Models\ResponseEnrichers\Music\ArtistResponseEnricher.cs" />
     <Compile Include="Models\ResponseEnrichers\Music\SongResponseEnricher.cs" />
@@ -245,11 +249,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestResult.cs" />
     <Compile Include="Services\Implementation\ArtistService.cs" />
+    <Compile Include="Services\Interface\IMusicService.cs" />
     <Compile Include="Services\Interface\IArtistService.cs" />
     <Compile Include="Services\Implementation\AlbumService.cs" />
     <Compile Include="Services\Interface\IAlbumService.cs" />
     <Compile Include="Services\Interface\ISongService.cs" />
     <Compile Include="Services\Implementation\SongService.cs" />
+    <Compile Include="Services\Implementation\MusicService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

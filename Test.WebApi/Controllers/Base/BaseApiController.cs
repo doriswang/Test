@@ -20,6 +20,7 @@ namespace Test.WebApi.Controllers
             this.songService = Container.Resolve<ISongService>();
             this.albumService = Container.Resolve<IAlbumService>();
             this.artistService = Container.Resolve<IArtistService>();
+            this.musicService = Container.Resolve<IMusicService>();
         }
 
         public IDataProvider provider { get; set; }
@@ -31,5 +32,7 @@ namespace Test.WebApi.Controllers
         public ISongService songService { get; set; }
 
         public IArtistService artistService { get; set; }
+
+        public IMusicService musicService { get; set; }
     }
 }

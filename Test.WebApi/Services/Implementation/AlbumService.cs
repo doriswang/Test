@@ -157,8 +157,9 @@ namespace Test.WebApi.Services
             if (currentAlbum == null)
                 return new RequestResult<AlbumModel>(HttpStatusCode.NotFound);
 
-            Mapper.CreateMap<AlbumModel, Album>();
-            currentAlbum = Mapper.Map<Album>(albumModel);
+            if (albumModel.ArtistName.IsNotNullOrEmpty()) currentAlbum.ArtistName = albumModel.ArtistName;
+            if (albumModel.Title.IsNotNullOrEmpty()) currentAlbum.Title = albumModel.Title;
+            if (albumModel.Id != 0) currentAlbum.Id = albumModel.Id;
 
             var repoResult = repository.UpdateAlbum(currentAlbum);
             if (!repoResult)

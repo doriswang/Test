@@ -53,6 +53,12 @@ namespace Test.WebApi.Extensions
                  routeTemplate: "api/music/artist/{name}",
                  defaults: new { controller = "Artist" }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "Music",
+                routeTemplate: "api/music",
+                defaults: new { controller = "Music" }
+            );
         }
     }
 }

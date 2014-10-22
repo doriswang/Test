@@ -115,8 +115,12 @@ namespace Test.WebApi.Services
             if(song == null)
                 return new RequestResult<SongModel>(HttpStatusCode.NotFound);
 
-            Mapper.CreateMap<SongModel, Song>();
-            song = Mapper.Map<Song>(songModel);
+            if (songModel.Id != 0) song.Id = songModel.Id;
+            if (songModel.AlbumId != 0) song.AlbumId = songModel.AlbumId;
+            if (songModel.Title.IsNotNullOrEmpty()) song.Title = songModel.Title;
+            if (songModel.Length.IsNotNullOrEmpty()) song.Length = songModel.Length;
+            if (songModel.TrackNumber != 0) song.TrackNumber = songModel.TrackNumber;
+            if (songModel.Genre.IsNotNullOrEmpty()) song.Genre = songModel.Genre;
 
             var result = repository.UpdateSong(albumId, song);
 

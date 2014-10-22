@@ -90,6 +90,12 @@ namespace Test.Data.Repositories
             return this.Database.Select<Song>(sql, parameters).IsNotNullOrEmpty();
         }
 
+        public IEnumerable<string> GetArtistNames() 
+        {
+            var sql = @"SELECT DISTINCT [ArtistName] FROM [testdb].[dbo].[Albums];";
+            return this.Database.Select<Album>(sql).Select(x => x.ArtistName);
+        }
+
         public Album GetAlbum(int albumId)
         {
             return this.Database.Get<Album>(x => x.Id == albumId);
